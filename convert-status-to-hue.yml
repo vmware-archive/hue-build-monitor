@@ -1,0 +1,11 @@
+---
+platform: linux
+image: docker:///cfmobile/toronto-ci
+inputs:
+- name: hue-build-monitor
+- name: pipeline-status
+run:
+  path: /bin/sh
+  args:
+  - "-c"
+  - "hue-build-monitor/convert-status-to-hue.sh"

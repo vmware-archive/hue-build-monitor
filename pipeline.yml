@@ -1,0 +1,36 @@
+---
+resources:
+- name: pipeline-status
+  type: pipeline-status-resource
+  source:
+    host: {{HOST}}
+    user: {{USER}}
+    password: {{PASSWORD}}
+    pipeline_whitelist: {{PIPELINE_WHITELIST}}
+
+- name: hue-build-monitor
+  type: git
+  source:
+    uri: git@github.com:cfmobile/hue-build-monitor.git
+    branch: master
+    private_key: {{GIT_KEY}}
+
+- name: hue-light
+  type: phillips-hue
+  source:
+    host: {{HOST_URL}}
+    user_id: {{USER_ID}}
+    light_id: {{LIGHT_ID}}
+
+jobs:
+- name: update-hue-status
+  plan:
+    - get: pipeline-status
+      trigger: true
+    - get: hue-build-monitor
+    - task: convert-status-to-hue
+      file: hue-build-monitor/convert-status-to-hue.yml
+    - put: hue-light
+      tags: {{HUE_WORKER_TAGS}}
+      params:
+        config_file_path: convert-status-to-hue/hue-build-monitor/hue-config.json
