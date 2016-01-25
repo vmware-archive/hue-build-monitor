@@ -3,9 +3,9 @@ resources:
 - name: pipeline-status
   type: pipeline-status
   source:
-    host: {{HOST}}
-    user: {{USER}}
-    password: {{PASSWORD}}
+    host: {{CONCOURSE_HOST}}
+    user: {{CONCOURSE_USER}}
+    password: {{CONCOURSE_PASSWORD}}
     pipeline_whitelist: {{PIPELINE_WHITELIST}}
 
 - name: hue-build-monitor
@@ -18,9 +18,9 @@ resources:
 - name: hue-light
   type: phillips-hue
   source:
-    host: {{HOST_URL}}
-    user_id: {{USER_ID}}
-    light_id: {{LIGHT_ID}}
+    host: {{HUE_HOST}}
+    user_id: {{HUE_USER}}
+    light_id: {{HUE_LIGHT}}
 
 jobs:
 - name: update-hue-status
