@@ -4,6 +4,8 @@ image: docker:///cfmobile/toronto-ci
 inputs:
 - name: hue-build-monitor
 - name: pipeline-status
+outputs:
+- name: hue-config-output
 run:
   path: /bin/sh
   args:

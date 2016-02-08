@@ -33,4 +33,4 @@ jobs:
     - put: hue-light
       tags: [ {{WORKER_TAGS}} ]
       params:
-        config_file_path: convert-status-to-hue/hue-config.json
+        config_file_path: hue-config-output/hue-config.json
